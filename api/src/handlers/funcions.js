@@ -1,5 +1,6 @@
 const { Country, Activity } = require("../db.js");
 const axios = require("axios");
+const { Op } = require("sequelize")
 
 function countryInfoDetail(data) {
     return {
@@ -34,19 +35,45 @@ async function getCountriesDb() {
 }
 
 async function getCountriesName(name) {
-    const countryDbName = await Country.findOne({
+    const countryDbName = await Country.findAll({
         include: Activity,
         where: {
-            name
+            name: {
+                [Op.iLike]: `%${name}%`
+            }
         }
     })
     return countryDbName
 }
+
+async function getCountriesId(id) {
+    id = id.toUpperCase()
+    const countryByPk = await Country.findByPk(id, {
+        include: {
+            model: Activity
+        }
+    })
+    return countryByPk
+}
+
+async function postActivityDb({ name, difficulty, duration, season, country}){ 
+    const newActivity = await Activity.create({name, difficulty, duration, season})
+    const countryDb = await Country.findOne({
+        where: {
+            id: country
+        }
+    })
+    await newActivity.addCountry(countryDb)
+    return newActivity
+}
+
 // console.log(getCountries())
 // console.log(Country.findAll(), "avr")
 // console.log(Op, "op?")
 module.exports = {
     getCountries,
     getCountriesDb,
-    getCountriesName
+    getCountriesName,
+    getCountriesId,
+    postActivityDb
 }

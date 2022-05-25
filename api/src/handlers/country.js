@@ -1,4 +1,4 @@
-const { getCountries, getCountriesDb, getCountriesName } = require("./funcions");
+const { getCountries, getCountriesDb, getCountriesName, getCountriesId } = require("./funcions");
 
 const getCountry = async (req, res, next) => {
     try {
@@ -17,6 +17,18 @@ const getCountry = async (req, res, next) => {
     }
 }
 
+const getCountryId = async (req, res, next) => {
+    try {
+        const { id } = req.params
+        // console.log(id)
+        const countryInDbId = await getCountriesId(id)
+        res.status(200).json(countryInDbId)
+    } catch (err) {
+        next(err)
+    }
+}
+
 module.exports = {
-    getCountry
+    getCountry,
+    getCountryId
 }
