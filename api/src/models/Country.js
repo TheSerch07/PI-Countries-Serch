@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
       unique: true,
       allowNull: false
     },
-    img: {
+    flag: {
       type: DataTypes.TEXT,
       allowNull: false
     },
@@ -23,9 +23,15 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    capital: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "Without capital"
+    },
     subregion: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      defaultValue: "Without subregion"
     },
     area: {
       type: DataTypes.INTEGER,
