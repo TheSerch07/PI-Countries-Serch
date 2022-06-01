@@ -28,7 +28,7 @@ const getCountryId = async (req, res, next) => {
     }
 }
 
-module.exports = {
+module.exports = { 
     getCountry,
     getCountryId
 }

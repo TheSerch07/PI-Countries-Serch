@@ -1,16 +1,30 @@
 import axios from "axios";
 
 export const FETCH_COUNTRIES = "@countries/fetch_countries"
-
+export const FETCH_COUNTRIES_NAME = "@countries/fetch_countries_name"
+ 
 export function fetchCountries() {
     return function(dispatch) {
         axios.get("http://localhost:3001/country/")
         .then((countries) => {
             dispatch({
                 type: FETCH_COUNTRIES,
-                payload: countries
+                payload: countries.data
             })
         })
         .catch((err) => console.log(err))
     }
 };
+
+export function fetchCountriesName(name) {
+    return function(dispatch) {
+        axios.get("http://localhost:3001/country/?name=" + name)
+        .then((countries) => {
+            dispatch({
+                type: FETCH_COUNTRIES_NAME,
+                payload: countries.data
+            })
+        })
+        .catch((err) => console.log(err))
+    }
+}
