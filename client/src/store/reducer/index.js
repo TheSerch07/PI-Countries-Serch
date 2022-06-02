@@ -1,4 +1,5 @@
-import { FETCH_COUNTRIES, FETCH_COUNTRIES_NAME } from "../actions"
+import { ASC, MIN } from "../../components/Order"
+import { FETCH_COUNTRIES, FETCH_COUNTRIES_NAME, ORDER_COUNTRIES, ORDER_COUNTRIES_POPULATION } from "../actions"
 
 const initialState = {
     countries: [],
@@ -10,12 +11,46 @@ export default function reducer (state = initialState, action) {
         case FETCH_COUNTRIES: 
             return {
                 ...state,
-                countries: action.payload
+                countries: action.payload,
+                filteredCountries: action.payload
             }
         case FETCH_COUNTRIES_NAME:
             return {
                 ...state,
-                countries: action.payload
+                filteredCountries: action.payload
+            }
+        case ORDER_COUNTRIES: 
+            let orderCountriesName = [...state.filteredCountries]
+            orderCountriesName = orderCountriesName.sort((a, b) => {
+                // console.log(a, "aa")
+                if (a.name < b.name) {
+                    return action.payload === ASC ? -1 : 1
+                }
+                if (a.name > b.name) {
+                    return action.payload === ASC ? 1 : -1
+                }
+                return 0
+            })
+            return {
+                ...state,
+                filteredCountries: orderCountriesName
+            }
+        case ORDER_COUNTRIES_POPULATION: 
+            let orderCountriesPop = [...state.filteredCountries]
+            console.log(orderCountriesPop, "k?")
+            orderCountriesPop = orderCountriesPop.sort((a, b) => {
+                if (a.population < b.population) {
+                    return action.payload === MIN ? -1 : 1
+                }
+                if (a.population > b.population) {
+                    return action.payload === MIN ? 1 : -1
+                }
+                return 0
+            })
+            return {
+                ...state,
+                filteredCountries: orderCountriesPop
+
             }
         default:
             return {...state}
