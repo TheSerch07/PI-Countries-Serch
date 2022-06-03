@@ -1,3 +1,8 @@
 export default function Pagination() {
-    return 
+    return (
+        <div>
+        <button>Next</button>
+        <button>Previous</button>
+        </div>
+    )
 }
