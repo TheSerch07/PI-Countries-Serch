@@ -1,16 +1,18 @@
 import './App.css';
-import Countries from './components/Countries';
-import Order from './components/Order';
-import SearchBar from './components/SearchBar';
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Home from './components/Home';
+import Landing from './components/Landing';
 
 function App() {
   return (
+    <BrowserRouter>
     <div className="App">
-      <h1>Countries App</h1>
-      < SearchBar />
-      < Order />
-      < Countries />
+      <Routes>
+        <Route exact path='/' element={<Landing/>} />
+        <Route path='/home' element={<Home/>} />
+      </Routes>
     </div>
+    </BrowserRouter>
   );
 }
 
