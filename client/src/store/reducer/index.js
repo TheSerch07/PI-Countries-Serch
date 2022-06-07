@@ -1,9 +1,10 @@
 import { ASC, MIN } from "../../components/Order"
-import { FETCH_COUNTRIES, FETCH_COUNTRIES_NAME, ORDER_COUNTRIES, ORDER_COUNTRIES_POPULATION } from "../actions"
+import { FETCH_COUNTRIES, FETCH_COUNTRIES_NAME, FILTER_COUNTRIES_CONTINENT, ORDER_COUNTRIES, ORDER_COUNTRIES_POPULATION } from "../actions"
 
 const initialState = {
     countries: [],
-    filteredCountries: []
+    filteredCountries: [],
+    nameFiltered: []
 }
 
 export default function reducer (state = initialState, action) {
@@ -17,7 +18,8 @@ export default function reducer (state = initialState, action) {
         case FETCH_COUNTRIES_NAME:
             return {
                 ...state,
-                filteredCountries: action.payload
+                filteredCountries: action.payload,
+                nameFiltered: action.payload
             }
         case ORDER_COUNTRIES: 
             let orderCountriesName = [...state.filteredCountries]
@@ -51,6 +53,15 @@ export default function reducer (state = initialState, action) {
                 ...state,
                 filteredCountries: orderCountriesPop
 
+            }
+        case FILTER_COUNTRIES_CONTINENT: 
+            let filterCountries = state.countries
+            // console.log(action.payload, "el pay")
+
+            let continentCountries = action.payload === "All" ? filterCountries : filterCountries.filter((con) => con.continent === action.payload)
+            return {
+                ...state,
+                filteredCountries: continentCountries
             }
         default:
             return {...state}

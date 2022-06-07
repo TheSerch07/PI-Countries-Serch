@@ -4,6 +4,7 @@ export const FETCH_COUNTRIES = "@countries/fetch_countries"
 export const FETCH_COUNTRIES_NAME = "@countries/fetch_countries_name"
 export const ORDER_COUNTRIES = "@countries/order_alp"
 export const ORDER_COUNTRIES_POPULATION = "@countries/order_pop"
+export const FILTER_COUNTRIES_CONTINENT = "@countries/filter_continent"
  
 export function fetchCountries() {
     return function(dispatch) {
@@ -41,6 +42,13 @@ export function orderCountries(ord) {
 export function orderCountriesPopulation(ord) {
     return {
         type: ORDER_COUNTRIES_POPULATION,
+        payload: ord
+    }
+}
+
+export function filterCountriesContinent(ord) {
+    return {
+        type: FILTER_COUNTRIES_CONTINENT,
         payload: ord
     }
 }
