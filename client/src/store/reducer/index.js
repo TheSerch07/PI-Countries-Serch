@@ -1,5 +1,5 @@
 import { ASC, MIN } from "../../components/Order"
-import { FETCH_COUNTRIES, FETCH_COUNTRIES_NAME, FILTER_COUNTRIES_CONTINENT, ORDER_COUNTRIES, ORDER_COUNTRIES_POPULATION } from "../actions"
+import { FETCH_COUNTRIES, FETCH_COUNTRIES_NAME, FILTER_COUNTRIES_CONTINENT, ORDER_COUNTRIES, ORDER_COUNTRIES_POPULATION, POST_ACTIVITY } from "../actions"
 
 const initialState = {
     countries: [],
@@ -63,6 +63,10 @@ export default function reducer (state = initialState, action) {
                 ...state,
                 filteredCountries: continentCountries
             }
+        case POST_ACTIVITY: 
+            return {
+                ...state
+            }  
         default:
             return {...state}
     }

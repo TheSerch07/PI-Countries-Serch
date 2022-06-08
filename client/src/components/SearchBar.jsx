@@ -9,6 +9,9 @@ export default function SearchBar() {
     function onSubmit(e) {
         e.preventDefault()
         dispatch(fetchCountriesName(search))
+        const input = document.getElementById("submit")
+        input.value = ""
+        // setSearch("")
     }
     
     function onInputChange(e) {
@@ -18,7 +21,7 @@ export default function SearchBar() {
     return (
         <div>
             <form onSubmit={onSubmit}>
-                <input type="text" placeholder="Name Country" onChange={onInputChange}/>
+                <input id="submit" type="text" placeholder="Name Country" onChange={onInputChange}/>
                 <input type="submit" value="Search Country!" />
             </form>
         </div>

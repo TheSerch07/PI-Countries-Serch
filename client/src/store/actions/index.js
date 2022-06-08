@@ -5,6 +5,7 @@ export const FETCH_COUNTRIES_NAME = "@countries/fetch_countries_name"
 export const ORDER_COUNTRIES = "@countries/order_alp"
 export const ORDER_COUNTRIES_POPULATION = "@countries/order_pop"
 export const FILTER_COUNTRIES_CONTINENT = "@countries/filter_continent"
+export const POST_ACTIVITY = "@countries/post_activity"
  
 export function fetchCountries() {
     return function(dispatch) {
@@ -27,6 +28,15 @@ export function fetchCountriesName(name) {
                 type: FETCH_COUNTRIES_NAME,
                 payload: countries.data
             })
+        })
+        .catch((err) => console.log(err))
+    }
+}
+
+export function postActiviy(act) {
+    return function(dispatch) {
+        axios.post("http://localhost:3001/activity", act)
+        .then(() => {
         })
         .catch((err) => console.log(err))
     }
