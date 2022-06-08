@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
+import { Link } from "react-router-dom"
 import { fetchCountriesName } from "../store/actions"
 
 export default function SearchBar() {
@@ -24,6 +25,9 @@ export default function SearchBar() {
                 <input id="submit" type="text" placeholder="Name Country" onChange={onInputChange}/>
                 <input type="submit" value="Search Country!" />
             </form>
+            <Link to="/activity" >
+                <button>Create An Activity!</button>    
+            </Link>
         </div>
     )
 }
