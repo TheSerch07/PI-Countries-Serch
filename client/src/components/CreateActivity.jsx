@@ -175,6 +175,7 @@ export default function CreateActivity() {
                     return <option value={country.id}>{country.name}</option>
                 })}
             </select>
+            
             {errors.country && <p>{errors.country}</p> }
             {activityInput.country.map((country) => {
                     return <div><button onClick={() => filterCountry(country)}>X</button> <h6>{country}</h6></div>
